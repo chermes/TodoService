@@ -27,3 +27,10 @@ def get_user_collection():
     database = get_db()
     coll = database.user_collection
     return coll
+
+
+def get_items_collection():
+    """Returns the items collection."""
+    database = get_db()
+    coll = database.items_collection
+    return coll

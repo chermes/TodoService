@@ -1,10 +1,11 @@
 """Main entry point for the API service."""
 from typing import List
+import uuid
 
 from fastapi import FastAPI, status
 import uvicorn
 
-from models import User
+from models import User, Item, ItemResponse
 import data_access
 
 app = FastAPI()
@@ -29,8 +30,34 @@ def create_user(user: User):
     if coll.find_one(user.dict()) is None:
         coll.insert_one(user.dict())
 
-    return status.HTTP_201_CREATED
+
+@app.post("/item")
+def create_item(item: Item):
+    """Create a new item."""
+    coll = data_access.get_items_collection()
+
+    item_dict = item.dict()
+    item_dict["item_id"] = uuid.uuid4()
+
+    coll.insert_one(item_dict)
+
+
+@app.get("/items",
+         response_model=List[ItemResponse])
+def get_items():
+    """Return ToDo items."""
+    coll = data_access.get_items_collection()
+    res = coll.aggregate([
+        {"$project": {
+            "_id": 0,
+        }}
+    ])
+    res = list(res)
+    print(res)
+    items = [ItemResponse(**i) for i in res]
+
+    return items
 
 
 if __name__ == "__main__":
-    uvicorn.run(app, host="0.0.0.0", port=80)
+    uvicorn.run(app, host="0.0.0.0", port=8080)
