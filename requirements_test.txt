@@ -2,3 +2,4 @@ pytest==6.2.2
 pylint==2.6.0
 pytest-pylint==0.18.0
 requests==2.25.1
+mongomock==3.22.1
