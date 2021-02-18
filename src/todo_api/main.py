@@ -8,10 +8,25 @@ import uvicorn
 from models import User, Item, ItemResponse
 import data_access
 
-app = FastAPI()
+app = FastAPI(
+    title="ToDo Service API",
+    description="Provides backend access to the ToDo items.",
+    version="0.1",
+    openapi_tags=[
+        {
+            "name": "users",
+            "description": "User management.",
+        },
+        {
+            "name": "items",
+            "description": "ToDo items.",
+        },
+    ]
+)
 
 @app.get("/users",
-         response_model=List[User])
+         response_model=List[User],
+         tags=["users"])
 def get_users():
     """Return all available user names."""
     coll = data_access.get_user_collection()
@@ -23,7 +38,8 @@ def get_users():
          responses={
              status.HTTP_201_CREATED: {"description": "user has been added."},
          },
-         status_code=status.HTTP_201_CREATED)
+         status_code=status.HTTP_201_CREATED,
+         tags=["users"])
 def create_user(user: User):
     """Create a user in the system."""
     coll = data_access.get_user_collection()
@@ -31,7 +47,8 @@ def create_user(user: User):
         coll.insert_one(user.dict())
 
 
-@app.post("/item")
+@app.post("/item",
+          tags=["items"])
 def create_item(item: Item):
     """Create a new item."""
     coll = data_access.get_items_collection()
@@ -43,7 +60,8 @@ def create_item(item: Item):
 
 
 @app.get("/items",
-         response_model=List[ItemResponse])
+         response_model=List[ItemResponse],
+         tags=["items"])
 def get_items():
     """Return ToDo items."""
     coll = data_access.get_items_collection()
