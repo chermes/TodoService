@@ -14,7 +14,6 @@
 
 ## To be Done (hah!)
 
-* Create Docker-compose file incl. MongoDB
 * Add API documentation
 * Initialize Vue.js frontend (project setup + build)
 * Create a first, visual list of items
