@@ -1,0 +1,14 @@
+version: "3.3"
+
+services:
+    api:
+        build:
+            context: .
+            dockerfile: todo_api.configfile
+        ports:
+            - "8080:8080"
+        environment:
+            MONGO_DB_URL: "mongo"
+            MONGO_DB_PORT: "27017"
+    mongo:
+        image: "mongo:latest"

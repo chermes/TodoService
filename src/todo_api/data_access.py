@@ -1,4 +1,6 @@
 """Data access layer for Mongodb."""
+import os
+
 import pymongo
 
 
@@ -9,8 +11,14 @@ class Database:
     @staticmethod
     def get_client() -> pymongo.MongoClient:
         """Returns a pymongo.MongoClient object."""
+        host = os.getenv("MONGO_DB_URL")
+        port = int(os.getenv("MONGO_DB_PORT", default="27017"))
+
+        if host is None:
+            raise EnvironmentError("Environment variable MONGO_DB_URL is not set")
+
         if Database.client is None:
-            Database.client = pymongo.MongoClient(host=None, port=None)
+            Database.client = pymongo.MongoClient(host=host, port=port)
 
         return Database.client
 
