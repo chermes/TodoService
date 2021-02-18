@@ -14,7 +14,6 @@
 
 ## To be Done (hah!)
 
-* Add API documentation
 * Initialize Vue.js frontend (project setup + build)
 * Create a first, visual list of items
 * How to do tests within Vue.js?
