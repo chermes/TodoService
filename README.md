@@ -30,8 +30,8 @@
 
 ## To be Done (hah!)
 
-* Differentiate between development, staging and production in database_names
-  and ports
+* Differentiate between development, staging and production in database
+  persistence and ports
 * Persist the staging / production databases
 * Initialize Vue.js frontend (project setup + build)
 * Create a first, visual list of items
