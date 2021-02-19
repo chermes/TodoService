@@ -4,11 +4,27 @@
 
 ## Installation
 
+### Tested Operating Systems
+
+* Ubuntu
+* Rasperry Pi B+
+
 ### Requirements
+
+* docker
+* docker-compose
 
 ### Using Dockerhub
 
 ### Build your own containers
+
+## Running the ToDo Service
+
+### Deployment: Production
+
+### Deployment: Staging
+
+### Deployment: Development
 
 ## Usage
 
