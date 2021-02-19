@@ -37,3 +37,5 @@
 * Create a first, visual list of items
 * How to do tests within Vue.js?
 * Fill README.md with description and screenshots
+* Once a minimal functionality is established, create a development branch and
+  protect the "main" from direct pushes
