@@ -5,3 +5,9 @@ services:
         build:
             context: todo_api/
             dockerfile: todo_api.configfile
+    webui:
+        build:
+            context: todo_webui/
+            dockerfile: todo_webui.configfile
+        depends_on:
+            - api

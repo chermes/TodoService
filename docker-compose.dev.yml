@@ -12,3 +12,6 @@ services:
             - mongo
     mongo:
         image: "mongo:latest"
+    webui:
+        ports:
+            - "8082:80"
