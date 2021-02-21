@@ -43,6 +43,10 @@
 ## To be Done (hah!)
 
 * Create a first, visual list of items
+  * navbar for header
+  * columns for content (for each column a component?)
+  * box for users
+  * cards for ToDo items
 * How to do tests within Vue.js?
 * Fill README.md with description and screenshots
 * Once a minimal functionality is established, create a development branch and
