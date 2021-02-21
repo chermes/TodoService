@@ -1,10 +1,7 @@
-# Starts a console with acces to the vue cli.
+# Starts a console with access to the vue cli and node package manager.
 #
-# Created a new Vue.js project via
+# Created a new Vue.js project via (and one level above)
 #   vue create --default -m npm --no-git todo_webui
-# Afterwards, copy the newly generated todo_webui/ contents to this level and
-# allowed the dev container todo_webui_vue.configfile to install its
-# dependencies.
 #
 # Run the service in a development mode:
 # npm run serve
