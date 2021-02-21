@@ -8,4 +8,4 @@
 
 PWD=`pwd`
 
-docker run --rm -it -v $PWD:/src -p 8082:8080 todo_webui_vue:latest /bin/bash
+docker run --rm -it -v $PWD:/src -p 8082:8080 -u $(id -u):$(id -u) todo_webui_vue:latest /bin/bash
