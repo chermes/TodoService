@@ -1,0 +1,1 @@
+docker build -f todo_webui_vue.configfile -t todo_webui_vue .
