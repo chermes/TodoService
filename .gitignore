@@ -1,6 +1,9 @@
 # project directories
 .vscode
 
+# ignore backup files
+*~
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

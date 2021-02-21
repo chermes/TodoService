@@ -30,6 +30,10 @@ RUN python3 -m pytest --pylint
 ###############################################################################
 FROM base as final
 
-EXPOSE 8080
+ENV MONGO_DB_URL="mongo"
+ENV MONGO_DB_PORT="27017"
+ENV MONGO_DB_NAME="todo_dev_database"
+
+EXPOSE 80
 
 CMD ["python3", "main.py"]

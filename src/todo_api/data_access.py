@@ -15,7 +15,7 @@ class Database:
         port = int(os.getenv("MONGO_DB_PORT", default="27017"))
 
         if host is None:
-            raise EnvironmentError("Environment variable MONGO_DB_URL is not set")
+            raise EnvironmentError("Environment variable MONGO_DB_URL is not set.")
 
         if Database.client is None:
             Database.client = pymongo.MongoClient(host=host, port=port)
@@ -25,8 +25,13 @@ class Database:
 
 def get_db():
     """Returns the Mongo database."""
+    db_name = os.getenv("MONGO_DB_NAME")
+    if db_name is None:
+        raise EnvironmentError("Environment variable MONGO_DB_NAME is not set.")
+
     client = Database.get_client()
-    database = client.todo_database
+    database = client.get_database(name=db_name)
+
     return database
 
 

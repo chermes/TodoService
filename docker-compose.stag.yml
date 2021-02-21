@@ -1,0 +1,10 @@
+version: "3.3"
+
+services:
+    api:
+        ports:
+            - "9081:80"
+        environment:
+            MONGO_DB_URL: "raspiserver"
+            MONGO_DB_PORT: "27017"
+            MONGO_DB_NAME: "todo_stag_database"
