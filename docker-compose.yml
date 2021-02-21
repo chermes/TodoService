@@ -3,5 +3,5 @@ version: "3.3"
 services:
     api:
         build:
-            context: .
+            context: todo_api/
             dockerfile: todo_api.configfile

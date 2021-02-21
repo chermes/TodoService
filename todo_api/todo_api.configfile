@@ -5,12 +5,12 @@ FROM python:3 as base
 
 RUN mkdir /install
 WORKDIR /install
-COPY src/todo_api/requirements.txt /install
+COPY requirements.txt /install
 RUN python3 -m pip install -r requirements.txt
 
 RUN mkdir /app
 WORKDIR /app
-COPY src/todo_api /app
+COPY src /app
 
 ###############################################################################
 # Test
@@ -18,7 +18,7 @@ COPY src/todo_api /app
 FROM base as test
 
 WORKDIR /install
-COPY src/todo_api/requirements_test.txt /install
+COPY requirements_test.txt /install
 RUN python3 -m pip install -r requirements_test.txt
 
 WORKDIR /app

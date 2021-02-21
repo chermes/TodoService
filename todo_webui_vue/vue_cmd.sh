@@ -6,6 +6,6 @@
 # Run the service in a development mode:
 # npm run serve
 
-PWD=`pwd`
+SRC_DIR=`pwd`/../todo_webui
 
-docker run --rm -it -v $PWD:/src -p 8082:8080 -u $(id -u):$(id -u) todo_webui_vue:latest /bin/bash
+docker run --rm -it -v $SRC_DIR:/src -p 8082:8080 -u $(id -u):$(id -u) todo_webui_vue:latest /bin/bash
