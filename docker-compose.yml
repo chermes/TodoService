@@ -4,10 +4,10 @@ services:
     api:
         build:
             context: todo_api/
-            dockerfile: todo_api.configfile
+            dockerfile: todo_api.containerfile
     webui:
         build:
             context: todo_webui/
-            dockerfile: todo_webui.configfile
+            dockerfile: todo_webui.containerfile
         depends_on:
             - api
