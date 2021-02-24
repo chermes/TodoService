@@ -3,6 +3,7 @@ from typing import List
 import uuid
 
 from fastapi import FastAPI, status
+from fastapi.middleware.cors import CORSMiddleware
 import uvicorn
 
 from models import User, Item, ItemResponse
@@ -22,6 +23,13 @@ app = FastAPI(
             "description": "ToDo items.",
         },
     ]
+)
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 @app.get("/users",
