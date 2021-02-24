@@ -1,5 +1,27 @@
 # todo_webui
 
+## Console Container
+
+The project uses a npm and vue-cli from within a Docker container.
+
+```
+cd todo_webui_vue
+```
+
+### Build the Console Container
+
+```
+sh vue_build.sh
+```
+
+### Run the Console Container
+
+```
+sh vue_cmd.sh
+```
+The working directory is then the ```todo_webui``` directory. From here you
+can start the ```npm``` and ```vue-cli``` commands (see also below).
+
 ## Project setup
 ```
 npm install
