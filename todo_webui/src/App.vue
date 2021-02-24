@@ -33,7 +33,6 @@
 </template>
 
 <script>
-// import HelloWorld from './components/HelloWorld.vue'
 import TodoItem from './components/TodoItem.vue'
 import UserItem from './components/UserItem.vue'
 
