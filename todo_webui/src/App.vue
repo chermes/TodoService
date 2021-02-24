@@ -33,6 +33,7 @@
 </template>
 
 <script>
+import Axios from 'axios';
 import TodoItem from './components/TodoItem.vue'
 import UserItem from './components/UserItem.vue'
 
@@ -41,6 +42,16 @@ export default {
   components: {
     TodoItem,
     UserItem
+  },
+  created(){
+    // update the page title by the environment title var
+    document.title = process.env.VUE_APP_TITLE;
+
+    Axios.get("/users").then((response) => {
+      console.log(response);
+    }).catch((error) => {
+      console.log(error.response.data);
+    })
   }
 }
 </script>
