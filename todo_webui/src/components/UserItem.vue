@@ -5,7 +5,7 @@
       <p class="header-title">{{ name }}</p>
     </header>
     <footer class="card-footer">
-      <a href="#" class="card-footer-item has-text-info-light">Delete</a>
+      <div class="card-footer-item"><button class="button is-danger is-rounded">Delete</button></div>
       <label class="checkbox card-footer-item">
         <input type="checkbox">
         Show ToDo's?
