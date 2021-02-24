@@ -1,7 +1,7 @@
 <template lang="html">
 
   <div class="card m-2 p-1 has-text-info-light has-background-info-dark">
-    <header class="card-header"><p class="header-title">User 1</p></header>
+    <header class="card-header"><p class="header-title">{{ name }}</p></header>
   </div>
 
 </template>
@@ -10,7 +10,7 @@
 
   export default  {
     name: 'user-item',
-    props: [],
+    props: ["name"],
     mounted () {
 
     },

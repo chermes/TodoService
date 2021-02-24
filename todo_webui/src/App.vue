@@ -11,7 +11,7 @@
     <div class="columns">
       <div class="column">
         <p class="title m-2 p-1">Users</p>
-        <user-item></user-item>
+        <user-item v-for="user in user_list" v-bind:name="user.name" v-bind:key="user.name"></user-item>
       </div>
       <div class="column">
         <p class="title">Backlog</p>
@@ -43,12 +43,18 @@ export default {
     TodoItem,
     UserItem
   },
-  created(){
+  data () {
+    return {
+      user_list: []
+    }
+  },
+  created () {
     // update the page title by the environment title var
     document.title = process.env.VUE_APP_TITLE;
 
     Axios.get("/users").then((response) => {
-      console.log(response);
+      console.log(response.data);
+      this.user_list = response.data;
     }).catch((error) => {
       console.log(error.response.data);
     })
