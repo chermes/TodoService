@@ -4,6 +4,7 @@
 FROM node
 
 RUN npm install -g @vue/cli
+RUN npm install -g vue-generate-component
 
 RUN mkdir /src
 WORKDIR /src
