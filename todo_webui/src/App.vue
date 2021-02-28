@@ -10,22 +10,39 @@
     <div class="columns">
       <div class="column is-one-fifth">
         <p class="title m-2 p-1">Users</p>
-        <user-item v-for="user in user_list" v-bind:name="user.name" v-bind:key="user.name"></user-item>
+        <user-item v-for="user in user_list"
+                   v-bind:key="user.name"
+                   v-bind:name="user.name"></user-item>
       </div>
       <div class="column">
-        <p class="title">Backlog</p>
-        <todo-item></todo-item>
-        <todo-item></todo-item>
+        <p class="title m-2 p-1">Backlog</p>
+        <todo-item v-for="item in item_backlog_list"
+                   v-bind:key="item.item_id"
+                   v-bind:content="item.content"
+                   v-bind:priority="item.priority"
+                   v-bind:users="item.users"
+                   v-bind:status_change_date="item.status_change_date">
+        </todo-item>
       </div>
       <div class="column">
-        <p class="title">In Progress</p>
-        <todo-item></todo-item>
-        <todo-item></todo-item>
+        <p class="title m-2 p-1">In Progress</p>
+        <todo-item v-for="item in item_inprogress_list"
+                   v-bind:key="item.item_id"
+                   v-bind:content="item.content"
+                   v-bind:priority="item.priority"
+                   v-bind:users="item.users"
+                   v-bind:status_change_date="item.status_change_date">
+        </todo-item>
       </div>
       <div class="column">
-        <p class="title">Done</p>
-        <todo-item></todo-item>
-        <todo-item></todo-item>
+        <p class="title m-2 p-1">Done</p>
+        <todo-item v-for="item in item_done_list"
+                   v-bind:key="item.item_id"
+                   v-bind:content="item.content"
+                   v-bind:priority="item.priority"
+                   v-bind:users="item.users"
+                   v-bind:status_change_date="item.status_change_date">
+        </todo-item>
       </div>
     </div>
   </div>
@@ -44,7 +61,10 @@ export default {
   },
   data () {
     return {
-      user_list: []
+      user_list: [],
+      item_backlog_list: [],
+      item_inprogress_list: [],
+      item_done_list: []
     }
   },
   created () {
@@ -52,12 +72,35 @@ export default {
     document.title = process.env.VUE_APP_TITLE;
 
     this.fetch_users();
+    this.fetch_items_backlog();
+    this.fetch_items_in_progress();
+    this.fetch_items_done();
   },
   methods: {
     fetch_users () {
       Axios.get("/users").then((response) => {
-        console.log(response.data);
         this.user_list = response.data;
+      }).catch((error) => {
+        console.log(error.response.data);
+      })
+    },
+    fetch_items_backlog () {
+      Axios.get("/items?status=backlog").then((response) => {
+        this.item_backlog_list = response.data;
+      }).catch((error) => {
+        console.log(error.response.data);
+      })
+    },
+    fetch_items_in_progress () {
+      Axios.get("/items?status=in_progress").then((response) => {
+        this.item_inprogress_list = response.data;
+      }).catch((error) => {
+        console.log(error.response.data);
+      })
+    },
+    fetch_items_done () {
+      Axios.get("/items?status=done").then((response) => {
+        this.item_done_list = response.data;
       }).catch((error) => {
         console.log(error.response.data);
       })
@@ -65,7 +108,10 @@ export default {
   },
   provide: function() {
     return {
-      fetch_users: this.fetch_users
+      fetch_users: this.fetch_users,
+      fetch_items_backlog: this.fetch_items_backlog,
+      fetch_items_in_progress: this.fetch_items_in_progress,
+      fetch_items_done: this.fetch_items_done
     }
   }
 }
