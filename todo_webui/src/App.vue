@@ -22,6 +22,8 @@
                    v-bind:priority="item.priority"
                    v-bind:users="item.users"
                    v-bind:status="item.status"
+                   v-bind:status_prev="item.status_prev"
+                   v-bind:status_next="item.status_next"
                    v-bind:status_change_date="item.status_change_date">
         </todo-item>
       </div>
@@ -33,6 +35,8 @@
                    v-bind:priority="item.priority"
                    v-bind:users="item.users"
                    v-bind:status="item.status"
+                   v-bind:status_prev="item.status_prev"
+                   v-bind:status_next="item.status_next"
                    v-bind:status_change_date="item.status_change_date">
         </todo-item>
       </div>
@@ -44,6 +48,8 @@
                    v-bind:priority="item.priority"
                    v-bind:users="item.users"
                    v-bind:status="item.status"
+                   v-bind:status_prev="item.status_prev"
+                   v-bind:status_next="item.status_next"
                    v-bind:status_change_date="item.status_change_date">
         </todo-item>
       </div>

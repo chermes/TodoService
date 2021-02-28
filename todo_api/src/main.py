@@ -97,6 +97,16 @@ def get_items(status: Optional[Status] = None):
     res = list(res)
     print(res)
 
+    # update status hint
+    for item in res:
+        if item["status"] == Status.backlog:
+            item["status_next"] = Status.in_progress
+        elif item["status"] == Status.in_progress:
+            item["status_prev"] = Status.backlog
+            item["status_next"] = Status.done
+        elif item["status"] == Status.done:
+            item["status_prev"] = Status.in_progress
+
     items = [ItemResponse(**i) for i in res]
 
     return items

@@ -8,16 +8,16 @@
       <div class="content">{{ content }}</div>
     </div>
     <footer class="card-footer">
-      <div class="card-footer-item">
-        <button class="button is-rounded">move left</button>
+      <div class="card-footer-item" v-if="status_prev">
+        <button class="button is-rounded">&#60;</button>
       </div>
       <div class="card-footer-item"
            v-for="user in users"
            v-bind:key="user">
         {{ user }}
       </div>
-      <div class="card-footer-item">
-        <button class="button is-rounded">move right</button>
+      <div class="card-footer-item" v-if="status_next">
+        <button class="button is-rounded">&#62;</button>
       </div>
     </footer>
   </div>
@@ -28,7 +28,7 @@
 
   export default  {
     name: 'todo-item',
-    props: ["content", "priority", "users", "status", "status_change_date"],
+    props: ["content", "priority", "users", "status", "status_prev", "status_next", "status_change_date"],
     mounted () {
 
     },
