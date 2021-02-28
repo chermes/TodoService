@@ -2,22 +2,25 @@
 
   <div class="card m-2 p-1 has-text-info-light has-background-info-dark">
     <header class="card-header">
-      <p class="header-title">{{ display_datetime(status_change_date) }}</p>
+      <p class="header-title">
+        {{ display_datetime(status_change_date) }}: {{ users.join(", ") }}
+      </p>
     </header>
     <div class="card-content">
       <div class="content">{{ content }}</div>
     </div>
     <footer class="card-footer">
       <div class="card-footer-item" v-if="status_prev">
-        <button class="button is-rounded">&#60;</button>
+        <b-button type="is-rounded" size="is-small">&#60;</b-button>
       </div>
-      <div class="card-footer-item"
-           v-for="user in users"
-           v-bind:key="user">
-        {{ user }}
+      <div class="card-footer-item">
+        <b-button type="is-rounded" size="is-small">Edit</b-button>
+      </div>
+      <div class="card-footer-item">
+        <b-button type="is-danger is-rounded" size="is-small">Delete</b-button> 
       </div>
       <div class="card-footer-item" v-if="status_next">
-        <button class="button is-rounded">&#62;</button>
+        <b-button type="is-rounded" size="is-small">&#62;</b-button>
       </div>
     </footer>
   </div>
