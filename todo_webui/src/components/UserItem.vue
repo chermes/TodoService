@@ -5,8 +5,12 @@
       <div class="content">{{ name }}</div>
     </div>
     <footer class="card-footer">
-      <div class="card-footer-item"><button class="button is-danger is-rounded">Delete</button></div>
-      <div class="card-footer-item"><b-switch :value="true" type="is-info">Show</b-switch></div>
+      <div class="card-footer-item">
+        <b-button type="is-danger is-rounded" size="is-small">Delete</b-button> 
+      </div>
+      <div class="card-footer-item">
+        <b-switch :value="true" type="is-info is-small">Show</b-switch>
+      </div>
     </footer>
   </div>
 
