@@ -1,5 +1,6 @@
 # project directories
 .vscode
+workspace.code-workspace
 
 # ignore backup files
 *~
