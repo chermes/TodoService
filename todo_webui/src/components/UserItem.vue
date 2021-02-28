@@ -1,6 +1,6 @@
 <template lang="html">
 
-  <div class="card m-2 p-1 has-text-info-light has-background-info-dark">
+  <div class="card m-2 p-1 has-text-white has-background-success-dark">
     <header class="card-header">
       <p class="header-title">{{ name }}</p>
     </header>
