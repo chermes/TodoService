@@ -1,5 +1,5 @@
 """Main entry point for the API service."""
-from typing import List
+from typing import List, Optional
 import uuid
 import datetime
 
@@ -7,7 +7,7 @@ from fastapi import FastAPI, status
 from fastapi.middleware.cors import CORSMiddleware
 import uvicorn
 
-from models import User, Item, ItemResponse
+from models import User, Item, ItemResponse, Status
 import data_access
 
 app = FastAPI(
@@ -74,16 +74,29 @@ def create_item(item: Item):
 @app.get("/items",
          response_model=List[ItemResponse],
          tags=["items"])
-def get_items():
+def get_items(status: Optional[Status] = None):
     """Return ToDo items."""
     coll = data_access.get_items_collection()
-    res = coll.aggregate([
-        {"$project": {
+    agg_pipeline = []
+
+    if status is not None:
+        agg_pipeline.append({
+            "$match": {
+                "status": str(status).split(".")[1]
+            }
+        })
+    print(status, agg_pipeline)
+
+    agg_pipeline.append({
+        "$project": {
             "_id": 0,
-        }}
-    ])
+        }})
+
+    res = coll.aggregate(agg_pipeline)
+
     res = list(res)
     print(res)
+
     items = [ItemResponse(**i) for i in res]
 
     return items

@@ -54,6 +54,18 @@ def test_items_create(patch_mongo):
             "status": "backlog",
             "users": ["John"],
         },
+        {
+            "content": "lorem ipsum",
+            "priority": "high",
+            "status": "in_progress",
+            "users": ["John"],
+        },
+        {
+            "content": "lorem ipsum",
+            "priority": "high",
+            "status": "done",
+            "users": ["John"],
+        },
     ]
 
     for item in item_list:
@@ -64,3 +76,8 @@ def test_items_create(patch_mongo):
     assert response.status_code == status.HTTP_200_OK
     msg = response.json()
     assert len(msg) == len(item_list)
+
+    response = client.get("/items?status=backlog")
+    assert response.status_code == status.HTTP_200_OK
+    msg = response.json()
+    assert len(msg) == 1
