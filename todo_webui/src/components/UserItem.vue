@@ -6,10 +6,7 @@
     </div>
     <footer class="card-footer">
       <div class="card-footer-item"><button class="button is-danger is-rounded">Delete</button></div>
-      <label class="checkbox card-footer-item">
-        <input type="checkbox">
-        Show ToDo's?
-      </label>
+      <div class="card-footer-item"><b-switch :value="true" type="is-info">Show</b-switch></div>
     </footer>
   </div>
 
