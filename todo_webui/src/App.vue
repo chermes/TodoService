@@ -9,13 +9,17 @@
     </nav>
     <div class="columns">
       <div class="column is-one-fifth">
-        <p class="title m-2 p-1">Users</p>
+        <p class="title m-2 p-1">Users
+          <button class="button is-rounded is-success">Create</button>
+        </p>
         <user-item v-for="user in user_list"
                    v-bind:key="user.name"
                    v-bind:name="user.name"></user-item>
       </div>
       <div class="column">
-        <p class="title m-2 p-1">Backlog</p>
+        <p class="title m-2 p-1">Backlog
+          <button class="button is-rounded is-info">Create</button>
+        </p>
         <todo-item v-for="item in item_backlog_list"
                    v-bind:key="item.item_id"
                    v-bind:content="item.content"
