@@ -1,6 +1,7 @@
 """Main entry point for the API service."""
 from typing import List
 import uuid
+import datetime
 
 from fastapi import FastAPI, status
 from fastapi.middleware.cors import CORSMiddleware
@@ -63,6 +64,9 @@ def create_item(item: Item):
 
     item_dict = item.dict()
     item_dict["item_id"] = uuid.uuid4()
+
+    tm_now = datetime.datetime.now().isoformat()
+    item_dict["status_change_date"] = tm_now
 
     coll.insert_one(item_dict)
 

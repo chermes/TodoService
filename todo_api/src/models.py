@@ -2,6 +2,7 @@
 import uuid
 from enum import Enum
 import datetime
+from typing import List
 
 from pydantic import BaseModel, Field
 
@@ -33,9 +34,10 @@ class Item(BaseModel):
                          example="lorem ipsum")
     priority: Priority
     status: Status
-    status_change_date: datetime.datetime
+    users: List[str] = Field(description="Assigned users.")
 
 
 class ItemResponse(Item):
     """Full ToDo item with id field."""
     item_id: uuid.UUID = Field(description="Item ID.")
+    status_change_date: datetime.datetime

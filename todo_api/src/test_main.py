@@ -1,6 +1,4 @@
 """Test the main.py API endpoints."""
-import datetime
-
 import pytest
 from fastapi import status
 from fastapi.testclient import TestClient
@@ -44,11 +42,17 @@ def test_users(patch_mongo):
 
 def test_items_create(patch_mongo):
     """Check if we can create and get a list of items."""
-    tm_now = datetime.datetime.now().isoformat()
+    # create a user, first
+    response = client.put("/user",
+                          json={"name": "John"})
+    assert response.status_code == status.HTTP_201_CREATED
+
     item_list = [
         {
-            "content": "lorem ipsum", "priority": "high",
-            "status": "backlog", "status_change_date": tm_now
+            "content": "lorem ipsum",
+            "priority": "high",
+            "status": "backlog",
+            "users": ["John"],
         },
     ]
 
