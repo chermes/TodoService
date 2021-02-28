@@ -72,9 +72,7 @@ export default {
     document.title = process.env.VUE_APP_TITLE;
 
     this.fetch_users();
-    this.fetch_items_backlog();
-    this.fetch_items_in_progress();
-    this.fetch_items_done();
+    this.fetch_items();
   },
   methods: {
     fetch_users () {
@@ -84,21 +82,19 @@ export default {
         console.log(error.response.data);
       })
     },
-    fetch_items_backlog () {
+    fetch_items () {
       Axios.get("/items?status=backlog").then((response) => {
         this.item_backlog_list = response.data;
       }).catch((error) => {
         console.log(error.response.data);
       })
-    },
-    fetch_items_in_progress () {
+
       Axios.get("/items?status=in_progress").then((response) => {
         this.item_inprogress_list = response.data;
       }).catch((error) => {
         console.log(error.response.data);
       })
-    },
-    fetch_items_done () {
+
       Axios.get("/items?status=done").then((response) => {
         this.item_done_list = response.data;
       }).catch((error) => {
@@ -109,9 +105,7 @@ export default {
   provide: function() {
     return {
       fetch_users: this.fetch_users,
-      fetch_items_backlog: this.fetch_items_backlog,
-      fetch_items_in_progress: this.fetch_items_in_progress,
-      fetch_items_done: this.fetch_items_done
+      fetch_items: this.fetch_items
     }
   }
 }
