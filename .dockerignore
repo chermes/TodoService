@@ -1,4 +1,4 @@
-**/node_modules
-**/dist
-**/.pytest_cache
-**/__pycache__
+node_modules
+dist
+.pytest_cache
+__pycache__
