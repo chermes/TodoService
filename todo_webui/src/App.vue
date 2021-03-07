@@ -9,17 +9,27 @@
     </nav>
     <div class="columns">
       <div class="column is-one-fifth">
-        <p class="title m-2 p-1">Users
-          <button class="button is-rounded is-success">Create</button>
-        </p>
+        <div class="title p-0 m-0 columns">
+          <div class="column">
+            Users
+          </div>
+          <div class="column has-text-right">
+            <b-button class="is-rounded is-success" size="is-small">Create</b-button>
+          </div>
+        </div>
         <user-item v-for="user in user_list"
                    v-bind:key="user.name"
                    v-bind:name="user.name"></user-item>
       </div>
       <div class="column">
-        <p class="title m-2 p-1">Backlog
-          <button class="button is-rounded is-info">Create</button>
-        </p>
+        <div class="title p-0 m-0 columns">
+          <div class="column">
+            Backlog
+          </div>
+          <div class="column has-text-right">
+            <b-button class="is-rounded is-info" size="is-small">Create</b-button>
+          </div>
+        </div>
         <todo-item v-for="item in item_backlog_list"
                    v-bind:key="item.item_id"
                    v-bind:content="item.content"
@@ -32,7 +42,11 @@
         </todo-item>
       </div>
       <div class="column">
-        <p class="title m-2 p-1">In Progress</p>
+        <div class="title p-0 m-0 columns">
+          <div class="column">
+            In Progress
+          </div>
+        </div>
         <todo-item v-for="item in item_inprogress_list"
                    v-bind:key="item.item_id"
                    v-bind:content="item.content"
@@ -45,7 +59,11 @@
         </todo-item>
       </div>
       <div class="column">
-        <p class="title m-2 p-1">Done</p>
+        <div class="title p-0 m-0 columns">
+          <div class="column">
+            Done
+          </div>
+        </div>
         <todo-item v-for="item in item_done_list"
                    v-bind:key="item.item_id"
                    v-bind:content="item.content"
