@@ -98,7 +98,17 @@ def delete_user(name: str):
           tags=["items"])
 def create_item(item: Item):
     """Create a new item."""
-    coll = data_access.get_items_collection()
+    coll_users = data_access.get_user_collection()
+    coll_items = data_access.get_items_collection()
+
+    if not item.users:
+        raise HTTPException(status.HTTP_404_NOT_FOUND,
+                            "Empty user list not allowed.")
+
+    for user_name in item.users:
+        if coll_users.find_one({"name": user_name}) is None:
+            raise HTTPException(status.HTTP_404_NOT_FOUND,
+                                f"User {user_name} not exists in the user list.")
 
     item_dict = item.dict()
     item_dict["item_id"] = uuid.uuid4()
@@ -106,7 +116,7 @@ def create_item(item: Item):
     tm_now = datetime.datetime.now().isoformat()
     item_dict["status_change_date"] = tm_now
 
-    coll.insert_one(item_dict)
+    coll_items.insert_one(item_dict)
 
 
 @app.get("/items",

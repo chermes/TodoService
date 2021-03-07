@@ -134,3 +134,29 @@ def test_items_create(patch_mongo):
     assert response.status_code == status.HTTP_200_OK
     msg = response.json()
     assert len(msg) == 1
+
+
+def test_items_create_no_user(patch_mongo):
+    """Check if we can create an item without a user."""
+    item = {
+        "content": "lorem ipsum",
+        "priority": "high",
+        "status": "backlog",
+        "users": ["John"],
+    }
+
+    reponse = client.post("/item", json=item)
+    assert reponse.status_code == status.HTTP_404_NOT_FOUND
+
+
+def test_items_create_empty_user(patch_mongo):
+    """Check if we can create an item without a user."""
+    item = {
+        "content": "lorem ipsum",
+        "priority": "high",
+        "status": "backlog",
+        "users": [],
+    }
+
+    reponse = client.post("/item", json=item)
+    assert reponse.status_code == status.HTTP_404_NOT_FOUND
