@@ -76,7 +76,6 @@ API: [http://localhost:9082](http://localhost:9082/docs)
 
 * Implement UI and backend functionality
   * create user
-  * delete user
   * create ToDo item
   * delete ToDo item
   * upgrade item status

@@ -102,18 +102,16 @@ export default {
     // update the page title by the environment title var
     document.title = process.env.VUE_APP_TITLE;
 
-    this.fetch_users();
     this.fetch_items();
   },
   methods: {
-    fetch_users () {
+    fetch_items () {
       Axios.get("/users").then((response) => {
         this.user_list = response.data;
       }).catch((error) => {
         console.log(error.response.data);
       })
-    },
-    fetch_items () {
+
       Axios.get("/items?status=backlog").then((response) => {
         this.item_backlog_list = response.data;
       }).catch((error) => {
@@ -135,7 +133,6 @@ export default {
   },
   provide: function() {
     return {
-      fetch_users: this.fetch_users,
       fetch_items: this.fetch_items
     }
   }

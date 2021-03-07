@@ -6,7 +6,9 @@
     </div>
     <footer class="card-footer">
       <div class="card-footer-item">
-        <b-button type="is-danger is-rounded" size="is-small">Delete</b-button> 
+        <b-button type="is-danger is-rounded" @click="delete_user" size="is-small">
+          Delete
+        </b-button> 
       </div>
       <div class="card-footer-item">
         <b-switch :value="true" type="is-info is-small">Show</b-switch>
@@ -17,11 +19,12 @@
 </template>
 
 <script lang="js">
+  import Axios from 'axios';
 
   export default  {
     name: 'user-item',
     props: ["name"],
-    inject: ["fetch_users"],
+    inject: ["fetch_items"],
     mounted () {
 
     },
@@ -31,7 +34,17 @@
       }
     },
     methods: {
-
+      delete_user_exec () {
+        Axios.delete("/users/" + this.name).then(() => {
+          this.fetch_items();
+        })
+      },
+      delete_user () {
+        this.$buefy.dialog.confirm({
+            message: 'Really delete user ' + this.name + '?',
+            onConfirm: () => this.delete_user_exec()
+        })
+      }
     },
     computed: {
 
