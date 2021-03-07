@@ -41,7 +41,7 @@
       },
       delete_user () {
         this.$buefy.dialog.confirm({
-            message: 'Really delete user ' + this.name + '?',
+            message: 'Really delete user ' + this.name + ' and all corresponding items?',
             onConfirm: () => this.delete_user_exec()
         })
       }
