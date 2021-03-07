@@ -40,6 +40,59 @@ def test_users(patch_mongo):
     assert len(msg) == len(user_list)
 
 
+def test_delete_user(patch_mongo):
+    """Deletes users from the system."""
+    user_list = [
+        {"name": "John"},
+        {"name": "Sarah"},
+        {"name": "Paula"},
+    ]
+    item_list = [
+        {
+            "content": "lorem ipsum",
+            "priority": "high",
+            "status": "backlog",
+            "users": ["John"],
+        },
+        {
+            "content": "lorem ipsum",
+            "priority": "high",
+            "status": "in_progress",
+            "users": ["John", "Sarah"],
+        }
+    ]
+
+    for user in user_list:
+        response = client.put("/user", json=user)
+        assert response.status_code == status.HTTP_201_CREATED
+    for item in item_list:
+        reponse = client.post("/item", json=item)
+        assert reponse.status_code == status.HTTP_200_OK
+
+    response = client.delete("/users/John")
+    assert response.status_code == status.HTTP_200_OK
+
+    # check if the user has been deleted
+    response = client.get("/users")
+    assert response.status_code == status.HTTP_200_OK
+    msg = response.json()
+    assert "John" not in [m["name"] for m in msg]
+
+    # check if the corresponding items have been deleted as well
+    response = client.get("/items")
+    assert response.status_code == status.HTTP_200_OK
+    msg = response.json()
+    for item in msg:
+        assert len(item["users"]) > 0
+        assert "John" not in item["users"]
+
+
+def test_delete_user_non_existent(patch_mongo):
+    """Test to delete a non-exist user."""
+    response = client.delete("/users/John")
+    assert response.status_code == status.HTTP_404_NOT_FOUND
+
+
 def test_items_create(patch_mongo):
     """Check if we can create and get a list of items."""
     # create a user, first

@@ -3,7 +3,7 @@ from typing import List, Optional
 import uuid
 import datetime
 
-from fastapi import FastAPI, status
+from fastapi import FastAPI, status, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 import uvicorn
 
@@ -54,6 +54,44 @@ def create_user(user: User):
     coll = data_access.get_user_collection()
     if coll.find_one(user.dict()) is None:
         coll.insert_one(user.dict())
+
+
+@app.delete("/users/{name}",
+            tags=["users"])
+def delete_user(name: str):
+    """Delete user with the given name.
+    This deletes also messages where only this user has been assigned.
+    """
+    coll_users = data_access.get_user_collection()
+    coll_items = data_access.get_items_collection()
+
+    # check if user name exists at all
+    elem = coll_users.find_one({"name": name})
+    if elem is None:
+        raise HTTPException(status.HTTP_404_NOT_FOUND,
+                            detail=f"Could not find the user name {name}.")
+
+    # get all items which contain this user -> update/delete
+    items = coll_items.find({"users": name})
+    for item in items:
+        item["users"].remove(name)
+        if len(item["users"]) > 0:
+            # update uses in this item
+            coll_items.update_one(
+                {
+                    "_id": item["_id"]
+                },
+                {
+                    "$set": {
+                        "users": item["users"]
+                    }
+                })
+        else:
+            # delete this item (no user left)
+            coll_items.delete_one({"_id": item["_id"]})
+
+    # delete user
+    coll_users.delete_one({"name": name})
 
 
 @app.post("/item",
