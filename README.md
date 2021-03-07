@@ -74,7 +74,6 @@ API: [http://localhost:9082](http://localhost:9082/docs)
 
 ## ToDo (hah!)
 
-* Switch date / users in item card headers
 * Add spacer between column title and Create button
 * Implement UI and backend functionality
   * create user

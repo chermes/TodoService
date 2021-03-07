@@ -1,10 +1,13 @@
 <template lang="html">
 
   <div class="card m-2 p-1 has-text-info-light has-background-info-dark">
-    <header class="card-header">
-      <p class="header-title">
-        {{ display_datetime(status_change_date) }}: {{ users.join(", ") }}
-      </p>
+    <header class="card-header columns">
+      <div class="header-title column">
+        {{ users.join(", ") }}
+      </div>
+      <div class="header-title column has-text-right is-one-quarter">
+        {{ display_datetime(status_change_date) }}
+      </div>
     </header>
     <div class="card-content">
       <div class="content">{{ content }}</div>
