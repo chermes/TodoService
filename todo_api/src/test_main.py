@@ -100,6 +100,10 @@ def test_items_create(patch_mongo):
                           json={"name": "John"})
     assert response.status_code == status.HTTP_201_CREATED
 
+    response = client.get("/users")
+    assert response.status_code == status.HTTP_200_OK
+    assert len(response.json()) == 1
+
     item_list = [
         {
             "content": "lorem ipsum",

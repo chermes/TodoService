@@ -133,17 +133,13 @@ def get_items(status: Optional[Status] = None):
                 "status": str(status).split(".")[1]
             }
         })
-    print(status, agg_pipeline)
 
     agg_pipeline.append({
         "$project": {
             "_id": 0,
         }})
 
-    res = coll.aggregate(agg_pipeline)
-
-    res = list(res)
-    print(res)
+    res = list(coll.aggregate(agg_pipeline))
 
     # update status hint
     for item in res:
