@@ -66,8 +66,8 @@ def test_delete_user(patch_mongo):
         response = client.put("/user", json=user)
         assert response.status_code == status.HTTP_201_CREATED
     for item in item_list:
-        reponse = client.post("/item", json=item)
-        assert reponse.status_code == status.HTTP_200_OK
+        response = client.post("/item", json=item)
+        assert response.status_code == status.HTTP_200_OK
 
     response = client.delete("/users/John")
     assert response.status_code == status.HTTP_200_OK
@@ -126,8 +126,8 @@ def test_items_create(patch_mongo):
     ]
 
     for item in item_list:
-        reponse = client.post("/item", json=item)
-        assert reponse.status_code == status.HTTP_200_OK
+        response = client.post("/item", json=item)
+        assert response.status_code == status.HTTP_200_OK
 
     response = client.get("/items")
     assert response.status_code == status.HTTP_200_OK
@@ -149,8 +149,8 @@ def test_items_create_no_user(patch_mongo):
         "users": ["John"],
     }
 
-    reponse = client.post("/item", json=item)
-    assert reponse.status_code == status.HTTP_404_NOT_FOUND
+    response = client.post("/item", json=item)
+    assert response.status_code == status.HTTP_404_NOT_FOUND
 
 
 def test_items_create_empty_user(patch_mongo):
@@ -162,5 +162,41 @@ def test_items_create_empty_user(patch_mongo):
         "users": [],
     }
 
-    reponse = client.post("/item", json=item)
-    assert reponse.status_code == status.HTTP_404_NOT_FOUND
+    response = client.post("/item", json=item)
+    assert response.status_code == status.HTTP_404_NOT_FOUND
+
+
+def test_items_delete(patch_mongo):
+    """Check if we can delete an items."""
+    # create a user, first
+    response = client.put("/user",
+                          json={"name": "John"})
+    assert response.status_code == status.HTTP_201_CREATED
+
+    response = client.get("/users")
+    assert response.status_code == status.HTTP_200_OK
+    assert len(response.json()) == 1
+
+    item = {
+        "content": "lorem ipsum",
+        "priority": "high",
+        "status": "backlog",
+        "users": ["John"],
+    }
+    response = client.post("/item", json=item)
+    assert response.status_code == status.HTTP_200_OK
+
+    # get the items back enriched with an ID
+    response = client.get("/items")
+    assert response.status_code == status.HTTP_200_OK
+    item_list = response.json()
+
+    # delete the first item
+    response = client.delete("/items/" + item_list[0]["item_id"])
+    assert response.status_code == status.HTTP_200_OK
+
+    # check if the item has been deleted
+    response = client.get("/items")
+    assert response.status_code == status.HTTP_200_OK
+    item_list = response.json()
+    assert not item_list

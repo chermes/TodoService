@@ -156,5 +156,19 @@ def get_items(status: Optional[Status] = None):
     return items
 
 
+@app.delete("/items/{item_id}",
+            tags=["items"])
+def delete_item(item_id: uuid.UUID):
+    """Delete a ToDo item in the database."""
+    coll_items = data_access.get_items_collection()
+
+    item = coll_items.find_one({"item_id": item_id})
+    if item is None:
+        raise HTTPException(status.HTTP_404_NOT_FOUND,
+                            f"Could not find the item with id {item_id}")
+
+    coll_items.delete_one({"item_id": item_id})
+
+
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=80, timeout_keep_alive=0)
