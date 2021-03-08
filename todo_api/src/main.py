@@ -176,13 +176,15 @@ def update_status(item_id: uuid.UUID, status: Status):
     """Update the status of an item."""
     coll_items = data_access.get_items_collection()
 
+    tm_now = datetime.datetime.now().isoformat()
     coll_items.update_one(
         {
             "item_id": item_id
         },
         {
             "$set": {
-                "status": status
+                "status": status,
+                "status_change_date": tm_now,
             }
         })
 

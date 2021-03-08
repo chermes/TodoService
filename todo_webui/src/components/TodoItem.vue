@@ -14,7 +14,7 @@
     </div>
     <footer class="card-footer">
       <div class="card-footer-item" v-if="status_prev">
-        <b-button type="is-rounded" size="is-small">&#60;</b-button>
+        <b-button type="is-rounded" @click="update_status_prev" size="is-small">&#60;</b-button>
       </div>
       <div class="card-footer-item">
         <b-button type="is-rounded" size="is-small">Edit</b-button>
@@ -23,7 +23,7 @@
         <b-button type="is-danger is-rounded" @click="delete_item" size="is-small">Delete</b-button> 
       </div>
       <div class="card-footer-item" v-if="status_next">
-        <b-button type="is-rounded" size="is-small">&#62;</b-button>
+        <b-button type="is-rounded" @click="update_status_next" size="is-small">&#62;</b-button>
       </div>
     </footer>
   </div>
@@ -67,8 +67,17 @@
             message: 'Really delete this item?',
             onConfirm: () => this.delete_item_exec()
         })
+      },
+      update_status_prev () {
+        Axios.post("/items/" + this.item_id + "/status/" + this.status_prev).then(() => {
+          this.fetch_items();
+        })
+      },
+      update_status_next () {
+        Axios.post("/items/" + this.item_id + "/status/" + this.status_next).then(() => {
+          this.fetch_items();
+        })
       }
-
     },
     computed: {
 
