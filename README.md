@@ -81,6 +81,7 @@ API: [http://localhost:9082](http://localhost:9082/docs)
   * downgrade item status
   * add search input
   * disable / endable user filter on items
+  * colorize items based on priority
 * sort items by
   * backlog: prio + change date
   * in progress: change date
