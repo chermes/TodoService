@@ -77,11 +77,10 @@ API: [http://localhost:9082](http://localhost:9082/docs)
 * Implement UI and backend functionality
   * create user
   * create ToDo item
-  * delete ToDo item
   * upgrade item status
   * downgrade item status
   * add search input
-  * disable / endable user items
+  * disable / endable user filter on items
 * sort items by
   * backlog: prio + change date
   * in progress: change date

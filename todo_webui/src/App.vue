@@ -32,6 +32,7 @@
         </div>
         <todo-item v-for="item in item_backlog_list"
                    v-bind:key="item.item_id"
+                   v-bind:item_id="item.item_id"
                    v-bind:content="item.content"
                    v-bind:priority="item.priority"
                    v-bind:users="item.users"
@@ -49,6 +50,7 @@
         </div>
         <todo-item v-for="item in item_inprogress_list"
                    v-bind:key="item.item_id"
+                   v-bind:item_id="item.item_id"
                    v-bind:content="item.content"
                    v-bind:priority="item.priority"
                    v-bind:users="item.users"
@@ -66,6 +68,7 @@
         </div>
         <todo-item v-for="item in item_done_list"
                    v-bind:key="item.item_id"
+                   v-bind:item_id="item.item_id"
                    v-bind:content="item.content"
                    v-bind:priority="item.priority"
                    v-bind:users="item.users"

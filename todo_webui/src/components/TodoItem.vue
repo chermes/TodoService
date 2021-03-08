@@ -20,7 +20,7 @@
         <b-button type="is-rounded" size="is-small">Edit</b-button>
       </div>
       <div class="card-footer-item">
-        <b-button type="is-danger is-rounded" size="is-small">Delete</b-button> 
+        <b-button type="is-danger is-rounded" @click="delete_item" size="is-small">Delete</b-button> 
       </div>
       <div class="card-footer-item" v-if="status_next">
         <b-button type="is-rounded" size="is-small">&#62;</b-button>
@@ -31,10 +31,12 @@
 </template>
 
 <script lang="js">
+  import Axios from 'axios';
 
   export default  {
     name: 'todo-item',
-    props: ["content", "priority", "users", "status", "status_prev", "status_next", "status_change_date"],
+    props: ["item_id", "content", "priority", "users", "status", "status_prev", "status_next", "status_change_date"],
+    inject: ["fetch_items"],
     mounted () {
 
     },
@@ -54,6 +56,17 @@
         var date = year + "-" + month + "-" + day;
 
         return date;
+      },
+      delete_item_exec () {
+        Axios.delete("/items/" + this.item_id).then(() => {
+          this.fetch_items();
+        })
+      },
+      delete_item () {
+        this.$buefy.dialog.confirm({
+            message: 'Really delete this item?',
+            onConfirm: () => this.delete_item_exec()
+        })
       }
 
     },
