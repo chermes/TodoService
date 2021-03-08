@@ -48,29 +48,35 @@ Besides its usefulness, this is a also a journey how to do that.
 ### Deployment: Production
 
 `docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d`
+
 OR (shorthand)
+
 `sh run_prod.sh`
 
-WebUI: [http://localhost:8080](http://localhost:8080)
-API: [http://localhost:9080](http://localhost:9080/docs)
+* WebUI: [http://localhost:8080](http://localhost:8080)
+* API: [http://localhost:9080](http://localhost:9080/docs)
 
 ### Deployment: Staging
 
 `docker-compose -f docker-compose.yml -f docker-compose.stag.yml up -d`
+
 OR (shorthand)
+
 `sh run_stag.sh`
 
-WebUI: [http://localhost:8081](http://localhost:8081)
-API: [http://localhost:9081](http://localhost:9081/docs)
+* WebUI: [http://localhost:8081](http://localhost:8081)
+* API: [http://localhost:9081](http://localhost:9081/docs)
 
 ### Deployment: Development
 
 `docker-compose -f docker-compose.yml -f docker-compose.dev.yml up`
+
 OR (shorthand)
+
 `sh run_dev.sh`
 
-WebUI: [http://localhost:8082](http://localhost:8082)
-API: [http://localhost:9082](http://localhost:9082/docs)
+* WebUI: [http://localhost:8082](http://localhost:8082)
+* API: [http://localhost:9082](http://localhost:9082/docs)
 
 ## ToDo (hah!)
 
