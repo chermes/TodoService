@@ -83,9 +83,9 @@ API: [http://localhost:9082](http://localhost:9082/docs)
   * disable / endable user filter on items
   * colorize items based on priority
 * sort items by
-  * backlog: prio + change date
-  * in progress: change date
-  * done: change date
+  * backlog: prio (descending) + change date (ascending)
+  * in progress: change date (ascending)
+  * done: change date (descending)
 * create and add ToDo logo
 * create and add ToDo favicon
 * migrate this ToDo list to the development environment :)
