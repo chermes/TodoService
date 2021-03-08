@@ -86,6 +86,7 @@ OR (shorthand)
   * add search input
   * disable / endable user filter on items
   * colorize items based on priority
+  * condense the "done" list (more compact cards...)
 * sort items by
   * backlog: prio (descending) + change date (ascending)
   * in progress: change date (ascending)
