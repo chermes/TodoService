@@ -77,8 +77,6 @@ API: [http://localhost:9082](http://localhost:9082/docs)
 * Implement UI and backend functionality
   * create user
   * create ToDo item
-  * upgrade item status
-  * downgrade item status
   * add search input
   * disable / endable user filter on items
   * colorize items based on priority
