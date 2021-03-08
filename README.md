@@ -81,6 +81,11 @@ API: [http://localhost:9082](http://localhost:9082/docs)
   * upgrade item status
   * downgrade item status
   * add search input
+  * disable / endable user items
+* sort items by
+  * backlog: prio + change date
+  * in progress: change date
+  * done: change date
 * create and add ToDo logo
 * create and add ToDo favicon
 * migrate this ToDo list to the development environment :)
