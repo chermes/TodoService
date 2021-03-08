@@ -200,3 +200,46 @@ def test_items_delete(patch_mongo):
     assert response.status_code == status.HTTP_200_OK
     item_list = response.json()
     assert not item_list
+
+
+def test_items_status_update(patch_mongo):
+    """Check if we can update the status of an item."""
+    # create a user, first
+    response = client.put("/user",
+                          json={"name": "John"})
+    assert response.status_code == status.HTTP_201_CREATED
+
+    response = client.get("/users")
+    assert response.status_code == status.HTTP_200_OK
+    assert len(response.json()) == 1
+
+    item = {
+        "content": "lorem ipsum",
+        "priority": "high",
+        "status": "backlog",
+        "users": ["John"],
+    }
+    response = client.post("/item", json=item)
+    assert response.status_code == status.HTTP_200_OK
+
+    # get the item back enriched by an ID
+    response = client.get("/items")
+    assert response.status_code == status.HTTP_200_OK
+    item = response.json()[0]
+
+    # update the status
+    response = client.post("/items/" + item["item_id"] + "/status/in_progress")
+    assert response.status_code == status.HTTP_200_OK
+    #
+    response = client.get("/items")
+    assert response.status_code == status.HTTP_200_OK
+    item = response.json()[0]
+    assert item["status"] == "in_progress"
+
+    response = client.post("/items/" + item["item_id"] + "/status/done")
+    assert response.status_code == status.HTTP_200_OK
+    #
+    response = client.get("/items")
+    assert response.status_code == status.HTTP_200_OK
+    item = response.json()[0]
+    assert item["status"] == "done"

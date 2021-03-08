@@ -170,5 +170,22 @@ def delete_item(item_id: uuid.UUID):
     coll_items.delete_one({"item_id": item_id})
 
 
+@app.post("/items/{item_id}/status/{status}",
+          tags=["items"])
+def update_status(item_id: uuid.UUID, status: Status):
+    """Update the status of an item."""
+    coll_items = data_access.get_items_collection()
+
+    coll_items.update_one(
+        {
+            "item_id": item_id
+        },
+        {
+            "$set": {
+                "status": status
+            }
+        })
+
+
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=80, timeout_keep_alive=0)
