@@ -47,5 +47,13 @@ npm run test
 npm run lint
 ```
 
+### Create new Vue Component
+Create a single-file component:
+```
+cd src/components
+vgc -s <ComponentName>
+```
+The suffix "*.vue" is automatically created. Please use CamelCase for the component name.
+
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
