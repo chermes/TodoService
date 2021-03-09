@@ -92,6 +92,7 @@ OR (shorthand)
 * add api module versioning
 * create and add ToDo logo
 * create and add ToDo favicon
+* support different languages (how does the babel stuff work?)
 * migrate this ToDo list to the development environment :)
 * How to do tests within Vue.js?
 * How to do (automatic) MongoDB schema migration?
