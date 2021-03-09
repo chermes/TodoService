@@ -81,7 +81,6 @@ OR (shorthand)
 ## ToDo (hah!)
 
 * Implement UI and backend functionality
-  * create user
   * create ToDo item
   * disable / enable user filter on items
   * colorize items based on priority
