@@ -52,6 +52,11 @@ def get_users():
 def create_user(user: User):
     """Create a user in the system."""
     coll = data_access.get_user_collection()
+
+    if user.name == "":
+        raise HTTPException(status.HTTP_400_BAD_REQUEST,
+                            "User name must not be empty.")
+
     if coll.find_one(user.dict()) is None:
         coll.insert_one(user.dict())
 

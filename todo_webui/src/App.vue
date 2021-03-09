@@ -14,7 +14,7 @@
             Users
           </div>
           <div class="column has-text-right">
-            <b-button class="is-rounded is-success" size="is-small">Create</b-button>
+            <b-button class="is-rounded is-success" @click="create_user" size="is-small">Create</b-button>
           </div>
         </div>
         <user-item v-for="user in user_list"
@@ -86,6 +86,7 @@
 import Axios from 'axios';
 import TodoItem from './components/TodoItem.vue'
 import UserItem from './components/UserItem.vue'
+import CreateUserDialog from './components/CreateUserDialog.vue'
 
 export default {
   name: 'App',
@@ -131,6 +132,14 @@ export default {
         this.item_done_list = response.data;
       }).catch((error) => {
         console.log(error.response.data);
+      })
+    },
+    create_user () {
+      this.$buefy.modal.open({
+        parent: this,
+        component: CreateUserDialog,
+        hasModalCard: true,
+        trapFocus: true
       })
     }
   },

@@ -40,6 +40,16 @@ def test_users(patch_mongo):
     assert len(msg) == len(user_list)
 
 
+def test_create_empty_user(patch_mongo):
+    """Try to create an empty user name (should fail)."""
+    user = {
+        "name": ""
+    }
+
+    response = client.put("/user", json=user)
+    assert response.status_code == status.HTTP_400_BAD_REQUEST
+
+
 def test_delete_user(patch_mongo):
     """Deletes users from the system."""
     user_list = [
