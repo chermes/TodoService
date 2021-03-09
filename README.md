@@ -83,14 +83,15 @@ OR (shorthand)
 * Implement UI and backend functionality
   * create user
   * create ToDo item
-  * add search input
-  * disable / endable user filter on items
+  * disable / enable user filter on items
   * colorize items based on priority
+  * add search input
   * condense the "done" list (more compact cards...)
 * sort items by
   * backlog: prio (descending) + change date (ascending)
   * in progress: change date (ascending)
   * done: change date (descending)
+* add api module versioning
 * create and add ToDo logo
 * create and add ToDo favicon
 * migrate this ToDo list to the development environment :)
