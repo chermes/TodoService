@@ -14,7 +14,11 @@
             Users
           </div>
           <div class="column has-text-right">
-            <b-button class="is-rounded is-success" @click="create_user" size="is-small">Create</b-button>
+            <b-button class="is-rounded is-success"
+                      @click="create_user"
+                      size="is-small">
+              Create
+            </b-button>
           </div>
         </div>
         <user-item v-for="user in user_list"
@@ -27,7 +31,11 @@
             Backlog
           </div>
           <div class="column has-text-right">
-            <b-button class="is-rounded is-info" size="is-small">Create</b-button>
+            <b-button class="is-rounded is-info"
+                      @click="create_item"
+                      size="is-small">
+              Create
+            </b-button>
           </div>
         </div>
         <todo-item v-for="item in item_backlog_list"
@@ -84,9 +92,10 @@
 
 <script>
 import Axios from 'axios';
-import TodoItem from './components/TodoItem.vue'
-import UserItem from './components/UserItem.vue'
-import CreateUserDialog from './components/CreateUserDialog.vue'
+import TodoItem from './components/TodoItem.vue';
+import UserItem from './components/UserItem.vue';
+import CreateUserDialog from './components/CreateUserDialog.vue';
+import CreateItemDialog from './components/CreateItemDialog.vue';
 
 export default {
   name: 'App',
@@ -138,6 +147,14 @@ export default {
       this.$buefy.modal.open({
         parent: this,
         component: CreateUserDialog,
+        hasModalCard: true,
+        trapFocus: true
+      })
+    },
+    create_item () {
+      this.$buefy.modal.open({
+        parent: this,
+        component: CreateItemDialog,
         hasModalCard: true,
         trapFocus: true
       })

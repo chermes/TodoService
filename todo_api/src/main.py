@@ -107,12 +107,16 @@ def create_item(item: Item):
     coll_items = data_access.get_items_collection()
 
     if not item.users:
-        raise HTTPException(status.HTTP_404_NOT_FOUND,
+        raise HTTPException(status.HTTP_400_BAD_REQUEST,
                             "Empty user list not allowed.")
+
+    if not item.content:
+        raise HTTPException(status.HTTP_400_BAD_REQUEST,
+                            "No description / content given.")
 
     for user_name in item.users:
         if coll_users.find_one({"name": user_name}) is None:
-            raise HTTPException(status.HTTP_404_NOT_FOUND,
+            raise HTTPException(status.HTTP_400_BAD_REQUEST,
                                 f"User {user_name} not exists in the user list.")
 
     item_dict = item.dict()

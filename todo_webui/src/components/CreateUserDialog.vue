@@ -2,29 +2,27 @@
   <form action="">
     <div class="modal-card" style="width: auto">
         <header class="modal-card-head">
-            <p class="modal-card-title">Create User</p>
-            <button
-                type="button"
-                class="delete"
-                @click="$emit('close')"/>
+          <p class="modal-card-title">Create User</p>
+          <button
+              type="button"
+              class="delete"
+              @click="$emit('close')"/>
         </header>
         <section class="modal-card-body">
-            <b-field label="User Name">
-                <b-input
-                    v-model="user_name"
-                    placeholder="John"
-                    required>
-                </b-input>
-            </b-field>
+          <b-input
+              v-model="user_name"
+              placeholder="John"
+              required>
+          </b-input>
         </section>
         <footer class="modal-card-foot">
-            <b-button
-                label="Close"
-                @click="$emit('close')" />
-            <b-button
-                label="Create"
-                @click="add_user_name"
-                type="is-primary" />
+          <b-button
+              label="Close"
+              @click="$emit('close')" />
+          <b-button
+              label="Create"
+              @click="add_user_name"
+              type="is-primary" />
         </footer>
     </div>
   </form>
@@ -61,7 +59,7 @@
         }).catch((e) => {
           this.$buefy.toast.open({
               duration: 5000,
-              message: 'Sorry. Unable to create user ' + this.user_name + '</br>' + e,
+              message: 'Sorry. Unable to create user ' + this.user_name + '</br>' + e.response.data.detail,
               position: 'is-bottom',
               type: 'is-danger'
           })

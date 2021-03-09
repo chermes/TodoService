@@ -160,7 +160,7 @@ def test_items_create_no_user(patch_mongo):
     }
 
     response = client.post("/item", json=item)
-    assert response.status_code == status.HTTP_404_NOT_FOUND
+    assert response.status_code == status.HTTP_400_BAD_REQUEST
 
 
 def test_items_create_empty_user(patch_mongo):
@@ -173,7 +173,28 @@ def test_items_create_empty_user(patch_mongo):
     }
 
     response = client.post("/item", json=item)
-    assert response.status_code == status.HTTP_404_NOT_FOUND
+    assert response.status_code == status.HTTP_400_BAD_REQUEST
+
+
+def test_items_create_empty_content(patch_mongo):
+    """Check if we can create an item with no content."""
+    # create a user, first
+    response = client.put("/user",
+                          json={"name": "John"})
+    assert response.status_code == status.HTTP_201_CREATED
+
+    response = client.get("/users")
+    assert response.status_code == status.HTTP_200_OK
+    assert len(response.json()) == 1
+
+    item = {
+        "content": "",
+        "priority": "high",
+        "status": "backlog",
+        "users": ["John"],
+    }
+    response = client.post("/item", json=item)
+    assert response.status_code == status.HTTP_400_BAD_REQUEST
 
 
 def test_items_delete(patch_mongo):
