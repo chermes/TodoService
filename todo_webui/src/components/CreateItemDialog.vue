@@ -76,8 +76,10 @@
     mounted () {
       Axios.get("/users").then((response) => {
         this.avail_users = [];
+        this.selected_users = [];
         response.data.forEach(element => {
           this.avail_users.push(element.name)
+          this.selected_users.push(element.name)
         });
       })
 
