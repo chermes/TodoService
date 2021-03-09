@@ -82,6 +82,7 @@ OR (shorthand)
 
 * Implement UI and backend functionality
   * disable / enable user filter on items
+  * edit / modify item
   * colorize items based on priority
   * add search input
   * condense the "done" list (more compact cards...)
