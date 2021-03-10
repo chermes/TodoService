@@ -101,3 +101,4 @@ OR (shorthand)
 * Once a minimal functionality is established, create a development branch and
   protect the "main" from direct pushes
 * add icons (e.g. from Font Awesome)
+* add "about" dialog
