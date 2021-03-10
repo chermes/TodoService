@@ -81,11 +81,11 @@ OR (shorthand)
 ## ToDo (hah!)
 
 * Implement UI and backend functionality
-  * disable / enable user filter on items
   * edit / modify item
   * colorize items based on priority
   * add search input
   * condense the "done" list (more compact cards...)
+  * show number of items per user (stats)
 * sort items by
   * backlog: prio (descending) + change date (ascending)
   * in progress: change date (ascending)

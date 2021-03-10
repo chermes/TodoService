@@ -3,7 +3,7 @@ from typing import List, Optional
 import uuid
 import datetime
 
-from fastapi import FastAPI, status, HTTPException
+from fastapi import FastAPI, Query, status, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 import uvicorn
 
@@ -131,7 +131,7 @@ def create_item(item: Item):
 @app.get("/items",
          response_model=List[ItemResponse],
          tags=["items"])
-def get_items(status: Optional[Status] = None):
+def get_items(status: Optional[Status] = None, ignore_user: Optional[List[str]] = Query(None)):
     """Return ToDo items."""
     coll = data_access.get_items_collection()
     agg_pipeline = []
@@ -149,6 +149,13 @@ def get_items(status: Optional[Status] = None):
         }})
 
     res = list(coll.aggregate(agg_pipeline))
+
+    def filter_ignored_users(elem, ignore_user=ignore_user):
+        is_ignored = len(set(elem["users"]) - set(ignore_user)) == 0
+        return not is_ignored
+
+    if ignore_user is not None:
+        res = list(filter(filter_ignored_users, res))
 
     # update status hint
     for item in res:

@@ -108,7 +108,8 @@ export default {
       user_list: [],
       item_backlog_list: [],
       item_inprogress_list: [],
-      item_done_list: []
+      item_done_list: [],
+      disabled_users: {}
     }
   },
   created () {
@@ -125,19 +126,26 @@ export default {
         console.log(error.response.data);
       })
 
-      Axios.get("/items?status=backlog").then((response) => {
+      var cur_ignored_users = "";
+      for (var key in this.disabled_users) {
+        if (!this.disabled_users[key]) {
+          cur_ignored_users += "&ignore_user=" + key;
+        }
+      }
+
+      Axios.get("/items?status=backlog" + cur_ignored_users).then((response) => {
         this.item_backlog_list = response.data;
       }).catch((error) => {
         console.log(error.response.data);
       })
 
-      Axios.get("/items?status=in_progress").then((response) => {
+      Axios.get("/items?status=in_progress" + cur_ignored_users).then((response) => {
         this.item_inprogress_list = response.data;
       }).catch((error) => {
         console.log(error.response.data);
       })
 
-      Axios.get("/items?status=done").then((response) => {
+      Axios.get("/items?status=done" + cur_ignored_users).then((response) => {
         this.item_done_list = response.data;
       }).catch((error) => {
         console.log(error.response.data);
@@ -158,11 +166,16 @@ export default {
         hasModalCard: true,
         trapFocus: true
       })
+    },
+    update_user_show_status (name, status) {
+      this.disabled_users[name] = status;
+      this.fetch_items();
     }
   },
   provide: function() {
     return {
-      fetch_items: this.fetch_items
+      fetch_items: this.fetch_items,
+      update_user_show_status: this.update_user_show_status
     }
   }
 }

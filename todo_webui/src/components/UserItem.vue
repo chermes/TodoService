@@ -11,7 +11,10 @@
         </b-button> 
       </div>
       <div class="card-footer-item">
-        <b-switch :value="true" type="is-info is-small">Show</b-switch>
+        <b-switch v-model="is_shown"
+                  :rounded="false"
+                  @input="toggle_show"
+                  type="is-info is-small">Show?</b-switch>
       </div>
     </footer>
   </div>
@@ -24,13 +27,13 @@
   export default  {
     name: 'user-item',
     props: ["name"],
-    inject: ["fetch_items"],
+    inject: ["fetch_items", "update_user_show_status"],
     mounted () {
 
     },
     data () {
       return {
-
+        is_shown: true
       }
     },
     methods: {
@@ -44,6 +47,9 @@
             message: 'Really delete user ' + this.name + ' and all corresponding items?',
             onConfirm: () => this.delete_user_exec()
         })
+      },
+      toggle_show () {
+        this.update_user_show_status(this.name, this.is_shown);
       }
     },
     computed: {

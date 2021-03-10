@@ -149,6 +149,11 @@ def test_items_create(patch_mongo):
     msg = response.json()
     assert len(msg) == 1
 
+    response = client.get("/items?ignore_user=John")
+    assert response.status_code == status.HTTP_200_OK
+    msg = response.json()
+    assert len(msg) == 0
+
 
 def test_items_create_no_user(patch_mongo):
     """Check if we can create an item without a user."""
