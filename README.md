@@ -26,7 +26,7 @@ Besides its usefulness, this is a also a journey how to do that.
 ### Tested Operating Systems
 
 * Ubuntu
-* Rasperry Pi B+
+* Rasperry Pi 4 (Ubuntu Server) with installed Mongo DB instance.
 
 ### Requirements
 
@@ -38,6 +38,14 @@ Besides its usefulness, this is a also a journey how to do that.
 ### Build your own containers
 
 `docker-compose build`
+
+## Development Rules
+
+* Development environment: Implement new changes / features to branch "develop".
+* Staging environment: pull-request from branch "develop" to "staging".
+* Production environment: pull-request from branch "staging" to "main".
+
+Bug fixes can be applied on any environment, depending on the severity.
 
 ## Running the ToDo Service
 
