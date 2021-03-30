@@ -37,7 +37,17 @@ Besides its usefulness, this is a also a journey how to do that.
 
 ### Build your own containers
 
-`docker-compose build`
+Development environment:
+`sh build_dev.sh`
+This creates images with tag `:development`.
+
+Staging environment:
+`sh build_stag.sh`
+This creates images with tag `:staging`.
+
+Production environment:
+`sh build_prod.sh`
+This creates images with tag `:latest`.
 
 ## Development Rules
 
